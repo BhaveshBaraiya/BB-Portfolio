@@ -158,7 +158,7 @@ const Contact = () => {
               </div>
 
              <form 
-                action="https://formspree.io/f/xvzdyrnb" 
+                action={import.meta.env.VITE_FORMSPREE_URL}
                 method="POST"
                 className="relative z-10 flex flex-col gap-6"
                 >
