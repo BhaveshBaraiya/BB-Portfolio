@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-primary: #0ea5e9; 
+  --color-brand-secondary: #8b5cf6; 
+
+  --font-sans: "Inter", sans-serif;
+  --font-heading: "Space Grotesk", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-gray-300 antialiased overflow-x-hidden transition-colors duration-300;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-gray-300 antialiased overflow-x-hidden transition-colors duration-300;
+  }
+
+  ::selection {    
+    background-color: var(--color-brand-primary);
+    color: #fff;
+  }
+}
+
+/* Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-300 dark:bg-zinc-800 rounded-full border-2 border-transparent bg-clip-padding;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand-primary; /* Updated scrollbar hover */
+}
+
+.headline-block {
+  h1 {
+    font-family: var(--font-heading);
+    font-size: calc(2.5rem + 5vw) !important;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  p {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 3rem;
+  }
+}
+
+.cta-stroke-text {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+  transition: -webkit-text-stroke 0.3s ease;
+}
+
+section:hover .cta-stroke-text {
+  -webkit-text-stroke: 1px var(--color-brand-primary);
+}
+
+.cta-stroke-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  color: transparent;
+}
+
