@@ -1,10 +1,9 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 
 const Header = () => {
-  const headerRef = useRef(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [active, setActive] = useState('');
@@ -57,16 +56,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useGSAP(() => {
-    gsap.from(headerRef.current, {
-      y: -100,
-      opacity: 0,
-      duration: 1,
-      ease: "power4.out",
-      delay: 0.2
-    });
-  }, []);
-
+  // ✅ GSAP mobile menu animation (Kept this because it only affects opacity, no layout shifting)
   useGSAP(() => {
     if (isMobileMenuOpen) {
       gsap.fromTo('.mobile-menu', 
@@ -97,22 +87,22 @@ const Header = () => {
 
   return (
     <header 
-      ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
+      /* ✅ Perfectly static positioning. No GSAP refs, no height changes. */
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b py-4 ${
         isScrolled 
-          ? 'bg-white/85 dark:bg-zinc-950/85 backdrop-blur-xl border-zinc-200 dark:border-white/5 py-4 shadow-sm' 
-          : 'bg-transparent border-transparent py-6'
+          ? 'bg-white/85 dark:bg-zinc-950/85 backdrop-blur-xl border-zinc-200 dark:border-white/5 shadow-sm' 
+          : 'bg-transparent border-transparent'
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-
-        {/* LOGO */}
         <div className="cursor-pointer relative z-50 hover:scale-105 transition-transform">
+          <a href="#">
           <img 
-            src="/images/brand-logo.png"
+            src="/images/logo.png"
             alt="Bhavesh Baraiya Logo"
             className="h-12 md:h-16 w-auto object-contain dark:brightness-0 dark:invert transition-all duration-300"
           />
+          </a>
         </div>
 
         {/* DESKTOP NAV */}
@@ -169,7 +159,6 @@ const Header = () => {
       {/* MOBILE MENU */}
       <nav className="mobile-menu hidden fixed inset-0 h-screen w-full bg-white dark:bg-zinc-950 flex-col justify-center items-center gap-8 text-center z-40">
 
-        {/* ✅ SCROLLABLE NAV ITEMS */}
         <div className="max-h-[60vh] overflow-y-auto w-full flex flex-col items-center gap-6 px-6">
           {navItems.map((item) => (
             <a 

@@ -40,41 +40,72 @@ const faqData = [
 
 const FAQ = () => {
   const sectionRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0); 
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useGSAP(() => {
+
     gsap.fromTo('.faq-header-anim',
       { opacity: 0, y: 30 },
       {
-        opacity: 1, y: 0, duration: 1, ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 60%", toggleActions: "play none none reverse" }
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 60%",
+          toggleActions: "play none none reverse"
+        }
       }
     );
 
     gsap.fromTo('.faq-lottie-container',
-      { opacity: 0, x: 300, y: 50, rotation: 10, scale: 0.9 },
       {
-        opacity: 1, x: 0, y: 0, rotation: 0, scale: 1,
-        duration: 1.5, 
-        ease: "back.out(1.2)", 
-        scrollTrigger: { 
-          trigger: sectionRef.current, 
-          start: "top 60%", 
-          toggleActions: "play none none reverse" 
+        opacity: 0,
+        x: 500,
+        y: 80,
+        rotation: 6
+      },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 90%",
+          end: "top 40%",
+          scrub: true,
+          invalidateOnRefresh: true,
         }
       }
     );
 
     const items = gsap.utils.toArray('.faq-item');
-    
-    gsap.fromTo(items,
-      { opacity: 0, x: -50, filter: "blur(5px)" },
-      {
-        opacity: 1, x: 0, filter: "blur(0px)",
-        duration: 0.8, stagger: 0.15, ease: "power3.out",
-        scrollTrigger: { trigger: '.faq-list-container', start: "top 60%", toggleActions: "play none none reverse" }
-      }
-    );
+
+    items.forEach((item) => {
+      gsap.fromTo(item,
+        {
+          opacity: 0,
+          x: -40,
+          filter: "blur(5px)"
+        },
+        {
+          opacity: 1,
+          x: 0,
+          filter: "blur(0px)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 95%",
+            end: "top 60%",
+            scrub: true,
+            invalidateOnRefresh: true,
+          }
+        }
+      );
+    });
 
     items.forEach((item) => {
       item.addEventListener("mousemove", (e) => {
@@ -84,19 +115,18 @@ const FAQ = () => {
       });
     });
 
-    ScrollTrigger.refresh();
   }, { scope: sectionRef });
 
   return (
-    <section 
-      id="faq" 
-      ref={sectionRef} 
+    <section
+      id="faq"
+      ref={sectionRef}
       className="py-32 px-6 relative bg-white dark:bg-zinc-950 transition-colors duration-500 overflow-x-clip"
     >
       <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-brand-primary/5 dark:bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none mix-blend-overlay -translate-x-1/2"></div>
-      
+
       <div className="container mx-auto relative z-10 max-w-7xl">
-        
+
         <div className="text-center mb-24 pt-5">
           <div className="faq-header-anim will-change-transform">
             <SectionTitle title="FAQ" backtitle="Your Curiosity, My Clarity." />
@@ -107,17 +137,17 @@ const FAQ = () => {
         </div>
 
         <div className="flex flex-col-reverse lg:flex-row items-start gap-12 lg:gap-16 relative">
-          
+
           <div className="w-full lg:w-7/12 faq-list-container relative z-20 flex flex-col gap-6">
             {faqData.map((faq, index) => {
               const isOpen = activeIndex === index;
-              
+
               return (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className={`faq-item will-change-transform relative w-full rounded-3xl bg-zinc-50 dark:bg-zinc-900/50 border transition-all duration-500 overflow-hidden cursor-pointer group ${
-                    isOpen 
-                      ? 'border-brand-primary/50 shadow-[0_0_30px_rgba(var(--color-brand-primary),0.15)] dark:bg-zinc-900' 
+                    isOpen
+                      ? 'border-brand-primary/50 shadow-[0_0_30px_rgba(var(--color-brand-primary),0.15)] dark:bg-zinc-900'
                       : 'border-zinc-200 dark:border-zinc-800 hover:border-brand-primary/30'
                   }`}
                   onClick={() => setActiveIndex(isOpen ? null : index)}
@@ -137,17 +167,13 @@ const FAQ = () => {
                         </span>
                         {faq.question}
                       </h3>
-                      
+
                       <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-brand-primary text-white rotate-180' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400'}`}>
                         <ChevronDown size={20} />
                       </div>
                     </div>
 
-                    <div 
-                      className={`grid transition-all duration-500 ease-in-out ${
-                        isOpen ? 'grid-rows-[1fr] opacity-100 mt-6' : 'grid-rows-[0fr] opacity-0 mt-0'
-                      }`}
-                    >
+                    <div className={`grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 mt-6' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
                       <div className="overflow-hidden">
                         <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-base md:text-lg border-l-2 border-brand-primary/30 pl-4">
                           {faq.answer}
@@ -162,16 +188,16 @@ const FAQ = () => {
 
           <div className="w-full lg:w-5/12 relative self-stretch">
             <div className="faq-lottie-container sticky top-[5vh] flex items-center justify-center w-full h-[400px] md:h-[600px] bg-zinc-50/50 dark:bg-zinc-900/30 backdrop-blur-2xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-[40px] overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-brand-primary/10 blur-[100px] rounded-full scale-150 pointer-events-none"></div>
-            <div className="relative z-10 w-full h-full pointer-events-none">
-                <img 
-                src='./images/FAQS/faq-img.jpeg' 
-                alt='FAQ Image' 
-                className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
-              />
+              <div className="absolute inset-0 bg-brand-primary/10 blur-[100px] rounded-full scale-150 pointer-events-none"></div>
+              <div className="relative z-10 w-full h-full pointer-events-none">
+                <img
+                  src='./images/FAQS/faq-img.jpeg'
+                  alt='FAQ Image'
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
             </div>
-            </div>
-        </div>
+          </div>
 
         </div>
       </div>

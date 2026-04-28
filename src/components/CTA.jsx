@@ -24,24 +24,6 @@ const CTA = () => {
       }
     );
 
-    // 2. Parallax Image
-    gsap.fromTo(
-      imageRef.current,
-      { scale: 1.1, yPercent: -5 },
-      {
-        scale: 1,
-        yPercent: 5,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      }
-    );
-
-    // 3. Button Reveal
     gsap.fromTo(
       '.cta-btn',
       { opacity: 0, y: 20 },
@@ -84,18 +66,13 @@ const CTA = () => {
           </h2>
         </div>
       </div>
-
-      {/* 2. CONTENT */}
       <div className="container mx-auto relative z-30 px-6">
         <div className="cta-btn flex flex-col items-center md:items-start text-center md:text-left gap-6 max-w-xl">
-
-          {/* Headline */}
           <h3 className="text-3xl md:text-5xl font-bold text-white leading-[1.2] md:leading-[1.1] tracking-tight">
             Ready to engineer <br className="hidden md:block" />
             your next <span className="text-brand-primary">big idea?</span>
           </h3>          
 
-          {/* Button */}
           <a
             href="mailto:bhavesh.baraiya.codes@gmail.com"
             className="group relative inline-flex items-center gap-4 bg-brand-primary text-white px-8 py-4 md:px-6 md:py-3 rounded-full font-bold text-base overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_10px_40px_rgba(var(--color-brand-primary),0.3)]"
@@ -108,8 +85,6 @@ const CTA = () => {
           </a>
         </div>
       </div>
-
-      {/* 3. IMAGE */}
       <div
         className="relative md:absolute right-0 top-0 bottom-0 w-full md:w-[40%] h-[250px] md:h-full mt-10 md:mt-0 z-10 overflow-hidden"
         style={{ clipPath: "none" }}
@@ -136,8 +111,6 @@ const CTA = () => {
           />
         </div>
       </div>
-
-      {/* 🔥 EXTRA ACCENT (desktop only) */}
       <div className="hidden md:block absolute bottom-10 left-10 w-20 h-20 border border-zinc-700 rounded-full opacity-20"></div>
 
     </section>

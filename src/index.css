@@ -74,3 +74,8 @@ section:hover .cta-stroke-text {
   color: transparent;
 }
 
+.service-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
