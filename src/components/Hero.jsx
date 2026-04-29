@@ -37,7 +37,7 @@ const slideData = [
     badge: "Rhythm & Syntax",
     centerText: "CODE.WITH.CHORD", 
     floatingBadges: [
-      { Icon: Palette, label: "UI / UX", value: "Visual Rhythm", color: "cyan" },
+      { Icon: Palette, label: "Music", value: "Visual Rhythm", color: "cyan" },
       { Icon: Guitar, label: "Acoustic Vibe", value: "Creative Flow", color: "indigo" },
     ]
   }

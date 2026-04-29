@@ -41,6 +41,7 @@ const faqData = [
 const FAQ = () => {
   const sectionRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useGSAP(() => {
 
@@ -188,14 +189,26 @@ const FAQ = () => {
 
           <div className="w-full lg:w-5/12 relative self-stretch">
             <div className="faq-lottie-container sticky top-[5vh] flex items-center justify-center w-full h-[400px] md:h-[600px] bg-zinc-50/50 dark:bg-zinc-900/30 backdrop-blur-2xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-[40px] overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-brand-primary/10 blur-[100px] rounded-full scale-150 pointer-events-none"></div>
-              <div className="relative z-10 w-full h-full pointer-events-none">
+                            
+              <div className="absolute inset-0 bg-brand-primary/10 blur-[100px] rounded-full scale-150 pointer-events-none z-0"></div>
+                            
+              {!isImageLoaded && (
+                <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-800 animate-pulse z-10"></div>
+              )}
+              
+              <div className="relative z-20 w-full h-full pointer-events-none">
                 <img
                   src='./images/FAQS/faq-img.jpeg'
                   alt='FAQ Image'
-                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  onLoad={() => setIsImageLoaded(true)}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                    isImageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
                 />
               </div>
+
             </div>
           </div>
 

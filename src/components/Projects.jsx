@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -57,6 +57,33 @@ const projectsData = [
     liveLink: "https://codeandchordswithbb.vercel.app/",    
   }
 ];
+
+const ProjectImage = ({ project, isReversed }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="w-full lg:w-1/2 h-72 md:h-96 lg:h-auto relative overflow-hidden bg-zinc-100 dark:bg-zinc-950 border-l lg:border-l-0 lg:border-r border-zinc-200 dark:border-zinc-800">
+      <div className={`absolute inset-0 bg-gradient-to-${isReversed ? 'l' : 'r'} from-white via-transparent to-transparent dark:from-zinc-900 z-10 hidden lg:block pointer-events-none opacity-20`}></div>
+
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-800 animate-pulse z-0"></div>
+      )}
+
+      <img 
+        src={project.image} 
+        alt={project.title} 
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setIsLoaded(true)}
+        className={`project-image absolute inset-0 w-full h-full object-cover object-top transform group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 ease-out will-change-transform z-10 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+      
+      <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/5 transition-colors duration-500 z-20 mix-blend-overlay pointer-events-none"></div>
+    </div>
+  );
+};
 
 const Projects = () => {
   const sectionRef = useRef(null);
@@ -173,18 +200,9 @@ const Projects = () => {
                       )}
                     </div>
                   </div>
+                  
+                  <ProjectImage project={project} isReversed={isReversed} />
 
-                  <div className="w-full lg:w-1/2 h-72 md:h-96 lg:h-auto relative overflow-hidden bg-zinc-100 dark:bg-zinc-950 border-l lg:border-l-0 lg:border-r border-zinc-200 dark:border-zinc-800">
-                    <div className={`absolute inset-0 bg-gradient-to-${isReversed ? 'l' : 'r'} from-white via-transparent to-transparent dark:from-zinc-900 z-10 hidden lg:block pointer-events-none opacity-20`}></div>
-
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="project-image absolute inset-0 w-full h-full object-cover object-top transform group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 ease-out will-change-transform"
-                    />
-                    
-                    <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/5 transition-colors duration-500 z-20 mix-blend-overlay pointer-events-none"></div>
-                  </div>
                 </div>
               </div>
             );

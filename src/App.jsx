@@ -2,6 +2,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
+import Moments from './components/Moments';
 import Services from './components/Services';
 import Projects from './components/Projects';
 import Stats from './components/Stats';
@@ -20,6 +21,7 @@ function App() {
       <About />
       <Skills />
       <MarqueeStrip text="React • Node.js • Express • MongoDB • Python • Typo3 • AI" speed={15} />
+      <Moments />
       <Services />
       <Projects />
       <Stats />

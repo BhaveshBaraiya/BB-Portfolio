@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -10,9 +10,9 @@ const CTA = () => {
   const sectionRef = useRef(null);
   const marqueeRef = useRef(null);
   const imageRef = useRef(null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  useGSAP(() => {
-    // 1. Infinite Marquee
+  useGSAP(() => {    
     gsap.fromTo(
       marqueeRef.current,
       { xPercent: -50 },
@@ -46,16 +46,13 @@ const CTA = () => {
       ref={sectionRef}
       className="relative bg-zinc-950 overflow-hidden border-t border-zinc-800 flex flex-col md:flex-row items-center md:items-end gap-10 md:gap-0 min-h-[450px] py-16 md:pb-24 md:pt-0"
     >
-
-      {/* 🔥 BACKGROUND GLOW */}
+      
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 bg-brand-primary/20 blur-[120px] rounded-full opacity-40"></div>
       </div>
-
-      {/* 🔥 GRID TEXTURE */}
+      
       <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-
-      {/* 1. MARQUEE */}
+      
       <div className="relative md:absolute top-0 left-0 w-full md:w-[200vw] z-0 flex pointer-events-none mb-10 md:mb-0 md:mt-10">
         <div ref={marqueeRef} className="flex whitespace-nowrap items-center will-change-transform">
           <h2 className="text-[3rem] md:text-[4rem] font-black uppercase leading-none tracking-tighter mr-8 cta-stroke-text opacity-30 md:opacity-100">
@@ -102,16 +99,26 @@ const CTA = () => {
         />
 
         <div className="cta-image-clip h-full w-full relative">
-          <div className="absolute inset-0 bg-brand-primary/20 mix-blend-overlay z-20 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-brand-primary/20 mix-blend-overlay z-30 pointer-events-none"></div>
+          
+          {!isImageLoaded && (
+            <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-800 animate-pulse z-10"></div>
+          )}
+
           <img
             ref={imageRef}
             src="/images/CTA/cta.jpeg"
             alt="Collaboration"
-            className="w-full h-full object-cover will-change-transform"
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setIsImageLoaded(true)}
+            className={`w-full h-full object-cover will-change-transform transition-opacity duration-700 relative z-20 ${
+              isImageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
           />
         </div>
       </div>
-      <div className="hidden md:block absolute bottom-10 left-10 w-20 h-20 border border-zinc-700 rounded-full opacity-20"></div>
+      <div className="hidden md:block absolute bottom-10 left-10 w-20 h-20 border border-zinc-700 rounded-full opacity-20 z-0"></div>
 
     </section>
   );

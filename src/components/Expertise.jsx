@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -43,9 +43,9 @@ const expertiseData = [
 
 const Expertise = () => {
   const sectionRef = useRef(null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  useGSAP(() => {
-    // 1. Editorial Header Reveal
+  useGSAP(() => {    
     gsap.fromTo('.expertise-header-anim',
       { opacity: 0, y: 30 },
       {
@@ -53,17 +53,15 @@ const Expertise = () => {
         scrollTrigger: { trigger: sectionRef.current, start: "top 75%", toggleActions: "play none none reverse" }
       }
     );
-
-    // 2. Sticky Image Container
+    
     gsap.fromTo('.lottie-container',
-      { opacity: 0, y: 40 }, // Switched from x/rotation to a cleaner vertical glide
+      { opacity: 0, y: 40 }, 
       {
         opacity: 1, y: 0, duration: 1.5, ease: "expo.out",
         scrollTrigger: { trigger: sectionRef.current, start: "top 60%", toggleActions: "play none none reverse" }
       }
     );
-
-    // 3. Neural Progress Line
+    
     gsap.fromTo('.neural-progress',
       { scaleY: 0 },
       {
@@ -77,8 +75,7 @@ const Expertise = () => {
         }
       }
     );
-
-    // 4. Expertise Cards (Optimized for 60fps, removed heavy animated blur)
+    
     const items = gsap.utils.toArray('.expertise-item');
     
     items.forEach((item) => {
@@ -120,8 +117,7 @@ const Expertise = () => {
 
     ScrollTrigger.refresh();
   }, { scope: sectionRef });
-
-  // ✅ OPTIMIZATION: Hardware-accelerated magnetic tracker separated from GSAP renders
+  
   useEffect(() => {
     const items = document.querySelectorAll('.expertise-item');
     
@@ -167,17 +163,27 @@ const Expertise = () => {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 relative">                  
           <div className="w-full lg:w-5/12 relative">            
             <div className="lottie-container group sticky top-[15vh] flex items-center justify-center w-full h-[350px] md:h-[500px] bg-white/30 dark:bg-zinc-900/30 backdrop-blur-2xl border border-white/50 dark:border-zinc-800/50 rounded-[40px] overflow-hidden shadow-2xl">              
-              <div className="absolute inset-0 bg-brand-primary/10 blur-[100px] rounded-full scale-150 pointer-events-none"></div>
-              <div className="absolute inset-4 border border-zinc-200/50 dark:border-zinc-700/50 rounded-[28px] pointer-events-none z-20 transition-colors duration-500 group-hover:border-brand-primary/30"></div>
+                          
+              <div className="absolute inset-0 bg-brand-primary/10 blur-[100px] rounded-full scale-150 pointer-events-none z-0"></div>
+              <div className="absolute inset-4 border border-zinc-200/50 dark:border-zinc-700/50 rounded-[28px] pointer-events-none z-30 transition-colors duration-500 group-hover:border-brand-primary/30"></div>
+                          
+              {!isImageLoaded && (
+                <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-800 animate-pulse z-10"></div>
+              )}              
               <img 
                 src='./images/Expertise/expertise-img.jpeg' 
                 alt='Expertise Concept' 
-                className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                loading="lazy"
+                decoding="async"
+                onLoad={() => setIsImageLoaded(true)}
+                className={`absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 z-20 ${
+                  isImageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
               />
             </div>
           </div>
           <div className="w-full lg:w-7/12 relative md:pb-[30vh] expertise-list-container">            
-            <div className="absolute left-[20px] md:left-[30px] top-12 bottom-[30vh] w-[2px] bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>                      
+            <div className="absolute left-[20px] md:left-[30px] top-12 bottom-[30vh] w-[2px] bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>                       
             <div className="neural-progress absolute left-[20px] md:left-[30px] top-12 bottom-[30vh] w-[2px] bg-brand-primary origin-top shadow-[0_0_15px_rgba(var(--color-brand-primary),0.8)] will-change-transform z-10"></div>
             <div className="flex flex-col gap-12 relative z-20">
               {expertiseData.map((item, index) => (

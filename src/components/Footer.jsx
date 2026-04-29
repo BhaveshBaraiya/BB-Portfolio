@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -33,6 +33,7 @@ const InstagramIcon = () => (
 const Footer = () => {
   const footerRef = useRef(null);
   const currentYear = new Date().getFullYear();
+  const [isLogoLoaded, setIsLogoLoaded] = useState(false);
 
   useGSAP(() => {
     gsap.fromTo('.footer-col',
@@ -71,16 +72,22 @@ const Footer = () => {
 
       <CTA />
 
-      {/* 🔥 MAIN CONTENT */}
       <div className="footer-main-content container mx-auto px-6 py-20 relative z-10 grid md:grid-cols-3 gap-12 items-start">
 
-        {/* LEFT */}
         <div className="footer-col flex flex-col gap-6">
-          <div className="footer-logo w-fit">
+          <div className="footer-logo w-fit relative min-h-[48px] md:min-h-[80px] min-w-[120px]">
+            {!isLogoLoaded && (
+              <div className="absolute inset-0 bg-zinc-800 animate-pulse rounded-md z-0"></div>
+            )}
             <img
               src="/images/brand-logo.png"
               alt="Bhavesh Baraiya Logo"
-              className="h-12 md:h-20 w-auto object-contain brightness-0 invert"
+              loading="lazy"
+              decoding="async"
+              onLoad={() => setIsLogoLoaded(true)}
+              className={`h-12 md:h-20 w-auto object-contain brightness-0 invert relative z-10 transition-opacity duration-700 ${
+                isLogoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
             />
           </div>
 
@@ -90,7 +97,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* 🔥 CENTER (PHILOSOPHY) */}
         <div className="footer-col flex flex-col items-center justify-center text-center gap-4">
 
           <div className="w-10 h-[1px] bg-zinc-700"></div>
@@ -126,10 +132,8 @@ const Footer = () => {
 
           <div className="w-10 h-[1px] bg-zinc-700"></div>
 
-
         </div>
 
-        {/* RIGHT */}
         <div className="footer-col flex flex-col gap-6">
 
           <div>

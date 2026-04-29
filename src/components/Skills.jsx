@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -31,9 +31,30 @@ const skillCategories = [
 
 const Skills = () => {
   const sectionRef = useRef(null);
+  const bgWrapperRef = useRef(null);
+  const [isBgLoaded, setIsBgLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
-  useGSAP(() => {
-    // 1. Headers Reveal
+  // STRICT LAZY LOAD OBSERVER
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" } 
+    );
+
+    if (bgWrapperRef.current) {
+      observer.observe(bgWrapperRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useGSAP(() => {    
     const headers = gsap.utils.toArray('.skills-header-anim');
     headers.forEach((el) => {
       gsap.fromTo(el,
@@ -48,8 +69,7 @@ const Skills = () => {
         }
       );
     });
-
-    // 2. Progress Bars Fill
+    
     const bars = gsap.utils.toArray('.skill-fill');
     bars.forEach((bar) => {
       const targetWidth = bar.getAttribute('data-level') + '%';
@@ -67,8 +87,7 @@ const Skills = () => {
         }
       );
     });
-
-    // 3. Numbers Count Up
+    
     const percentages = gsap.utils.toArray('.skill-percentage');
     percentages.forEach((pct) => {
       const targetNum = pct.getAttribute('data-target');
@@ -98,14 +117,28 @@ const Skills = () => {
       ref={sectionRef} 
       className="py-24 px-6 relative border-t border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-zinc-900/50 transition-colors duration-500 overflow-hidden"
     >
-      <div 
-        className="absolute inset-0 bg-[url('/images/Skills/skills-bg.jpg')] bg-cover bg-center bg-no-repeat transition-opacity duration-500" 
-      />
+            
+      <div ref={bgWrapperRef} className="absolute inset-0 z-0">
+        {!isBgLoaded && (
+          <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-900 animate-pulse z-0"></div>
+        )}
+        
+        {isInView && (
+          <img 
+            src="/images/Skills/skills-bg.jpg"
+            alt="Skills Background"
+            onLoad={() => setIsBgLoaded(true)}
+            className={`w-full h-full object-cover object-center transition-opacity duration-700 z-10 ${
+              isBgLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        )}
+      </div>
       
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-brand-secondary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-brand-secondary/10 rounded-full blur-[100px] pointer-events-none z-10" />
 
-      <div className="container mx-auto relative z-10 max-w-6xl">
+      <div className="container mx-auto relative z-20 max-w-6xl">
         
         <div className="text-center mb-16 pt-5">
           <SectionTitle title="Skills" backtitle="My Expertise" className="text-black" />
@@ -137,7 +170,6 @@ const Skills = () => {
                     </div>
 
                     <div className="h-3 w-full bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-700/50 relative">
-                      {/* Fixed: Moved the comment OUT of the opening tag */}
                       <div 
                         className="skill-fill will-change-transform h-full bg-gradient-to-r from-brand-primary to-brand-secondary rounded-full relative"
                         data-level={skill.level}

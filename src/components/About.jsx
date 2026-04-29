@@ -18,20 +18,66 @@ const headlineTech = [
   "Vue", "Shopify"
 ];
 
+
+const AboutSliderImage = ({ src, index, currentImageIndex }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const wrapperRef = useRef(null);
+  const isActive = index === currentImageIndex;
+
+  useEffect(() => {
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect(); 
+        }
+      },
+      { rootMargin: "200px" } 
+    );
+
+    if (wrapperRef.current) {
+      observer.observe(wrapperRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={wrapperRef} className="absolute inset-0 w-full h-full">
+      {!isLoaded && isActive && (
+        <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-800 animate-pulse z-0"></div>
+      )}
+            
+      {isInView && (
+        <img
+          src={src}
+          alt={`Bhavesh Baraiya - Slide ${index + 1}`}
+          onLoad={() => setIsLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out z-10 ${
+            isActive
+              ? (isLoaded ? 'opacity-100 scale-105' : 'opacity-0 scale-105')
+              : 'opacity-0 scale-100'
+          }`}
+        />
+      )}
+    </div>
+  );
+};
+
 const About = () => {
   const containerRef = useRef(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Smooth Crossfade Slider Logic
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % aboutSliderImages.length);
-    }, 4500); // 4.5 seconds per slide for a nice, classic pacing
+    }, 4500);
     return () => clearInterval(timer); 
   }, []);
 
   useGSAP(() => {
-    // Floating effect for the whole image container
     gsap.to('.about-slider-wrapper', {
       y: -10, 
       duration: 4, 
@@ -40,7 +86,6 @@ const About = () => {
       repeat: -1
     });
 
-    // Elegant slide-in for the image container
     gsap.fromTo('.about-left-col',
       { opacity: 0, x: -40 },
       { 
@@ -53,7 +98,6 @@ const About = () => {
       }
     );
 
-    // Staggered text reveal
     gsap.fromTo('.about-text-anim',
       { opacity: 0, y: 20 },
       { 
@@ -65,8 +109,7 @@ const About = () => {
         }
       }
     );
-
-    // Tech badges pop-in
+    
     gsap.fromTo('.tech-badge',
       { opacity: 0, scale: 0.9 },
       { 
@@ -84,43 +127,27 @@ const About = () => {
 
   return (
     <section id="about" className="py-24 px-6 relative border-t border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
-      
-      {/* Background Atmosphere */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 dark:bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/5 dark:bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
-
       <div className="container mx-auto max-w-7xl relative z-10">
-        
         <div className="text-center mb-16 pt-5">
           <SectionTitle title="About Me" backtitle="Who I Am" />
         </div>
-
-        <div ref={containerRef} className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-        
-          {/* LEFT: IMAGE SLIDER */}
-          <div className="about-left-col flex-1 w-full max-w-md lg:max-w-lg relative group will-change-transform">
-                  
-            
-            {/* ✅ MAIN CONTAINER: Changed to geometric shape: top-right & bottom-left rounded (larger 3xl for a premium look), top-left & bottom-right remain sharp. Overflow-hidden clips all images inside. */}
+        <div ref={containerRef} className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">      
+          <div className="about-left-col flex-1 w-full max-w-md lg:max-w-lg relative group will-change-transform">          
             <div className="about-slider-wrapper relative z-10 rounded-tr-3xl rounded-bl-3xl overflow-hidden bg-zinc-200 dark:bg-zinc-900 shadow-2xl h-[450px] md:h-[550px] border border-white/20 dark:border-white/5">
               
               {aboutSliderImages.map((src, index) => (
-                <img 
-                  key={index}
+                <AboutSliderImage 
+                  key={index} 
                   src={src} 
-                  alt={`Bhavesh Baraiya - Slide ${index + 1}`} 
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out ${
-                    index === currentImageIndex 
-                      ? 'opacity-100 scale-105' 
-                      : 'opacity-0 scale-100'
-                  }`}
+                  index={index} 
+                  currentImageIndex={currentImageIndex} 
                 />
               ))}
-              
-              {/* Inner Shadow / Vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none"></div>
-                      
-              <div className="absolute bottom-6 left-6 md:left-auto md:right-6 bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl shadow-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+                            
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none z-20"></div>                      
+              <div className="absolute bottom-6 left-6 md:left-auto md:right-6 bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 p-5 rounded-2xl shadow-2xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75 z-30">
                 <div className="flex items-center gap-4">
                   <div className="text-4xl font-black text-white leading-none">3+</div>
                   <div className="flex flex-col">
@@ -132,8 +159,6 @@ const About = () => {
 
             </div>
           </div>
-
-          {/* RIGHT: TEXT CONTENT */}
           <div className="flex-1 space-y-10">
             <div className="space-y-6">
               <div className="about-text-anim flex items-center gap-3">

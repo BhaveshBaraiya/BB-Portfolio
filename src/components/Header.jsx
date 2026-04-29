@@ -56,7 +56,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ✅ GSAP mobile menu animation (Kept this because it only affects opacity, no layout shifting)
   useGSAP(() => {
     if (isMobileMenuOpen) {
       gsap.fromTo('.mobile-menu', 
@@ -87,7 +86,6 @@ const Header = () => {
 
   return (
     <header 
-      /* ✅ Perfectly static positioning. No GSAP refs, no height changes. */
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b py-4 ${
         isScrolled 
           ? 'bg-white/85 dark:bg-zinc-950/85 backdrop-blur-xl border-zinc-200 dark:border-white/5 shadow-sm' 
@@ -143,8 +141,7 @@ const Header = () => {
             </a>
           </div>
         </div>
-
-        {/* MOBILE CONTROLS */}
+        
         <div className="md:hidden flex items-center gap-4 relative z-50">
           <button onClick={toggleTheme}>
             {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
