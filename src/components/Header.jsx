@@ -9,7 +9,7 @@ const Header = () => {
   const [active, setActive] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const navItems = ['HOME','ABOUT', 'SKILLS', 'SERVICES', 'PROJECTS','STATS','EXPERTISE','FAQS', 'CONTACT'];
+  const navItems = ['HOME','ABOUT', 'SKILLS', 'MOMENTS', 'SERVICES', 'PROJECTS','STATS','EXPERTISE','FAQS', 'CONTACT'];
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');

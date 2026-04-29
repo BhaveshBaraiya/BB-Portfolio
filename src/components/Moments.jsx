@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Camera } from 'lucide-react';
+import SectionTitle from './SectionTitle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,28 +152,24 @@ const MomentCard = ({ moment }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="moment-item relative group break-inside-avoid rounded-2xl overflow-hidden cursor-pointer bg-zinc-200 dark:bg-zinc-800 mb-6">
-      {/* 2. Added min-h-[250px] so the skeleton has a shape before the image calculates its height */}
+    <div className="moment-item relative group break-inside-avoid rounded-2xl overflow-hidden cursor-pointer bg-zinc-200 dark:bg-zinc-800 mb-6">      
       <div className="w-full relative overflow-hidden min-h-[250px]">
-        
-        {/* 3. The Skeleton Loader (Pulses while isLoaded is false) */}
+                
         {!isLoaded && (
           <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-700 animate-pulse z-0"></div>
         )}
-
-        {/* 4. The Image (Fades in smoothly via opacity transition once loaded) */}
+        
         <img 
           src={moment.src} 
           alt={moment.title} 
           loading="lazy"
           decoding="async"
-          onLoad={() => setIsLoaded(true)} // Triggers when the browser finishes downloading the image
+          onLoad={() => setIsLoaded(true)}
           className={`w-full h-auto block scale-100 group-hover:scale-110 transition-all duration-700 ease-in-out filter grayscale-[50%] group-hover:grayscale-0 relative z-10 ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
         />
-        
-        {/* Only show overlays if the image has successfully loaded */}
+                
         <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
           
@@ -195,30 +192,41 @@ const Moments = () => {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
-    const items = gsap.utils.toArray('.moment-item');
+  const items = gsap.utils.toArray('.moment-item');
 
-    gsap.fromTo(items, 
-      { 
-        opacity: 0, 
-        y: 60, 
-        scale: 0.95 
+  items.forEach((item, i) => {
+    gsap.fromTo(item,
+      {
+        opacity: 0,
+        y: 80,
+        scale: 0.95
       },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 1,
-        ease: "back.out(1.2)",
-        stagger: 0.15, 
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%", 
-          end: "bottom 20%",
-          toggleActions: "play none none reverse" 
+          trigger: item,
+          start: "top 95%",
+          end: "top 60%",
+          scrub: true
         }
       }
     );
-  }, { scope: sectionRef });
+
+    gsap.to(item, {
+      y: i % 2 === 0 ? -20 : -40,
+      ease: "none",
+      scrollTrigger: {
+        trigger: item,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+  });
+}, { scope: sectionRef });
 
   return (
     <section 
@@ -234,9 +242,7 @@ const Moments = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 rounded-full mb-4">
             <Camera size={14} /> UNFILTERED
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white mb-4 tracking-tight">
-            Classic Moments.
-          </h2>
+          <SectionTitle title="Moments" backtitle="Captures" />
           <p className="text-zinc-600 dark:text-zinc-400 text-lg">
             A visual journal of the places I've been, the things I build, and the strings I bend.
           </p>

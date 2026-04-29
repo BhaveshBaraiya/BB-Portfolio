@@ -89,6 +89,21 @@ const Projects = () => {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
+    gsap.fromTo('.project-header-anim',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
     const cards = gsap.utils.toArray('.project-card');
 
     gsap.set(cards, { transformOrigin: "top center" });
@@ -100,13 +115,12 @@ const Projects = () => {
       
       gsap.to(card, {
         scale: 0.95, 
-        opacity: 0.4,
-        filter: "blur(4px)",
+        opacity: 1,
         ease: "none",
         scrollTrigger: {
-          trigger: nextCard,           
-          start: "top 90%", 
-          end: "top 150px", 
+          trigger: nextCard,          
+          start: "top bottom", 
+          end: "top top+=100", 
           scrub: true, 
         }
       });
@@ -137,7 +151,7 @@ const Projects = () => {
       <div className="container mx-auto max-w-7xl relative z-10"> 
         
         <div className="flex flex-col items-center text-center mb-16 lg:mb-24 pt-5 border-b border-zinc-200 dark:border-zinc-800 pb-12">
-          <div className="w-full flex flex-col items-center">
+          <div className="project-header-anim w-full flex flex-col items-center will-change-transform">
             <SectionTitle title="Projects" backtitle="My Work" />
             <p className="mt-6 text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-lg font-serif italic leading-relaxed">
               "A curated collection of digital architectures. Each project represents a unique problem solved with precision, logic, and creative flow."

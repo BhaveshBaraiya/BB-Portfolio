@@ -11,7 +11,7 @@ const slideData = [
     desc: "Architecting seamless full-stack applications with high-performance animations and secure backend systems.",
     img: "/images/Hero/hero-1.jpg",
     badge: "WEB & Animations",
-    centerText: "DEVELOPER.MODE", 
+    centerText: "ENGINEER.MODE", 
     floatingBadges: [
       { Icon: Code2, label: "Architecture", value: "Web & App", color: "cyan" },
       { Icon: BrainCircuit, label: "Automation", value: "System Logic", color: "indigo" },
