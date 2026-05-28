@@ -40,6 +40,21 @@ const projectsData = [
   },
   {
     id: "04",
+    title: "BBChat Real-Time Messenger",
+    category: "Full-Stack Real-Time Communication",
+    description: "A professional-grade, real-time messaging platform inspired by classic desktop chat interfaces. Engineered for speed and reliability, featuring instant socket-based communication, custom notification management, and media sharing capabilities.",
+    tech: ["React", "Node.js", "Express.js", "Socket.io", "PeerJS", "MongoDB", "Redux Toolkit", "Tailwind CSS", "Vite", "Cloudinary"],
+    highlights: [
+        "Real-time event-driven architecture using Socket.io for instantaneous message delivery.",
+        "Granular notification management allowing both global and per-chat muting preferences.",
+        "Optimized media pipeline with Cloudinary integration for seamless image and file sharing."
+    ],
+    image: "/images/Projects/bbchat.png", 
+    liveLink: "http://bb-chat-frontend.vercel.app/",
+    githubLink: "https://github.com/BhaveshBaraiya/BB-Chat"
+  },
+  {
+    id: "05",
     title: "BB Travels & Destinations",
     category: "Tours & Travels Website",
     description: "A tours and travels website that provides so many features to its users like it provides about the tour packages,price,inclusions and so many other features.You can discover so many tour packages.",
@@ -48,7 +63,7 @@ const projectsData = [
     liveLink: "https://itsbaraiya.github.io/BB.github.io/tours.html",
   },
   {
-    id: "05",
+    id: "06",
     title: "MERN Portfolio Template",
     category: "Full Stack Portfolio",
     description: "A full-stack MERN portfolio with a powerful backend and admin panel.Features secure authentication, real-time interactions, and dynamic content management.",
