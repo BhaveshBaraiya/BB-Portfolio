@@ -10,16 +10,26 @@ gsap.registerPlugin(ScrollTrigger);
 const projectsData = [
   {
     id: "01",
+    title: "TaskFlow Pro",
+    category: "Enterprise Project Management",
+    description: "A full-stack project management platform featuring real-time Kanban boards, task automation, and team collaboration. Integrated with Pusher for live notifications and NextAuth for secure, role-based access.",
+    tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "MongoDB", "Pusher", "NextAuth.js", "Server Actions"],
+    image: "/images/Projects/taskflow-banner.png", 
+    liveLink: "https://taskflow-pro-dev.vercel.app",
+    githubLink: "https://github.com/BhaveshBaraiya/Taskflow-Pro"
+  },
+  {
+    id: "02",
     title: "BB Shop",
     category: "E-commerce Website",
     description: "A modern e-commerce platform built using the MERN stack. Offers seamless shopping with cart, orders, and secure online payments.",
     tech: ["MongoDB", "Express", "React", "Node.js", "Vite", "JWT Auth", "REST API", "Cloudinary", "Axios", "Bootstrap", "Vercel", "Render", "Razorpay", "Stripe"],
     image: "/images/Projects/project-1.png",
-    liveLink: "bb-shop-frontend.vercel.app",
+    liveLink: "https://bb-shop-frontend.vercel.app",
     githubLink: "https://github.com/BhaveshBaraiya/BB-Shop"
   },
   {
-    id: "02",
+    id: "03",
     title: "Food Delivery",
     category: "Food Delivery Website",
     description: "A modern food delivery web application with a smooth and intuitive user experience. Features menu browsing, cart management, and responsive design for seamless ordering.",
@@ -29,17 +39,17 @@ const projectsData = [
     githubLink: "https://github.com/itsbaraiya/food-delivery"
   },
   {
-    id: "03",
+    id: "04",
     title: "RFP AI Platform",
     category: "AI SaaS Dashboard",
     description: "A next-generation proposal management engine. Features a complex user dashboard with role-based access, credit systems, and an integrated AI engine to auto-generate enterprise proposals.",
-    tech: ["React", "Node.js", "PostgreSQL", "Express","Vite","Vercel","Render", "OpenAI API", "Tailwind CSS", "Typescript"],
+    tech: ["React", "Node.js", "PostgreSQL", "Express", "Vite", "Vercel", "Render", "OpenAI API", "Tailwind CSS", "Typescript"],
     image: "/images/Projects/project-3.jpeg", 
     liveLink: "https://rfpaify.vercel.app/",
     githubLink: "https://github.com/itsbaraiya/RFP"
   },
   {
-    id: "04",
+    id: "05",
     title: "BBChat Real-Time Messenger",
     category: "Full-Stack Real-Time Communication",
     description: "A professional-grade, real-time messaging platform inspired by classic desktop chat interfaces. Engineered for speed and reliability, featuring instant socket-based communication, custom notification management, and media sharing capabilities.",
@@ -50,20 +60,20 @@ const projectsData = [
         "Optimized media pipeline with Cloudinary integration for seamless image and file sharing."
     ],
     image: "/images/Projects/bbchat.png", 
-    liveLink: "http://bb-chat-frontend.vercel.app/",
+    liveLink: "https://bb-chat-frontend.vercel.app/",
     githubLink: "https://github.com/BhaveshBaraiya/BB-Chat"
   },
   {
-    id: "05",
+    id: "06",
     title: "BB Travels & Destinations",
     category: "Tours & Travels Website",
     description: "A tours and travels website that provides so many features to its users like it provides about the tour packages,price,inclusions and so many other features.You can discover so many tour packages.",
-    tech: ["HTML","CSS", "PHP", "Git", "JavaScript", "Bootstrap"],
+    tech: ["HTML", "CSS", "PHP", "Git", "JavaScript", "Bootstrap"],
     image: "/images/Projects/project-4.jpg", 
     liveLink: "https://itsbaraiya.github.io/BB.github.io/tours.html",
   },
   {
-    id: "06",
+    id: "07",
     title: "MERN Portfolio Template",
     category: "Full Stack Portfolio",
     description: "A full-stack MERN portfolio with a powerful backend and admin panel.Features secure authentication, real-time interactions, and dynamic content management.",
