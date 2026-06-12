@@ -120,7 +120,7 @@ const FAQ = () => {
 
   return (
     <section
-      id="faq"
+      id="faqs"
       ref={sectionRef}
       className="py-32 px-6 relative bg-white dark:bg-zinc-950 transition-colors duration-500 overflow-x-clip"
     >
