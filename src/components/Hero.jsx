@@ -7,7 +7,7 @@ import { Code2, Sparkles, Guitar, TentTree, BrainCircuit, Palette } from 'lucide
 const slideData = [
   {
     sub: "Hey there, This is Bhavesh Baraiya",
-    head: "A Web Developer",
+    head: "A SOFTWARE ENGINEER",
     desc: "Architecting seamless full-stack applications with high-performance animations and secure backend systems.",
     img: "/images/Hero/hero-1.jpg",
     badge: "WEB & Animations",

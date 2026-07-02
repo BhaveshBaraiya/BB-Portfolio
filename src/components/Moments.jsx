@@ -28,124 +28,131 @@ const momentsData = [
   },
   {
     id: 4,
-    src: "/images/Moments/moment-3.jpeg",
-    title: "Acoustic Flow",
-    tag: "Music"
-  },
-  {
-    id: 5,
     src: "/images/Moments/moment-4.jpeg",
     title: "Festival Vibes",
     tag: "Celebration"
   },
   {
-    id: 6,
+    id: 5,
     src: "/images/Moments/moment-5.jpeg",
-    title: "Accoustic Vibes",
+    title: "Acoustic Vibes",
     tag: "Team Work"
   },
   {
-    id: 7,
+    id: 6,
     src: "/images/Moments/moment-6.jpeg",
     title: "Work Place",
     tag: "Casual"
   },
   {
-    id: 8,
+    id: 7,
     src: "/images/Moments/moment-7.jpeg",
     title: "AI Carnival",
     tag: "Fun Mode"
   },
   {
-    id: 9,
+    id: 8,
     src: "/images/Moments/moment-8.jpeg",
     title: "Solo Live Stage Moment",
     tag: "Concert Vibes"
   },
   {
-    id: 10,
+    id: 9,
     src: "/images/Moments/moment-9.jpeg",
     title: "Celebration Mode",
     tag: "Team Work"
   },
   {
-    id: 11,
+    id: 10,
     src: "/images/Moments/moment-10.jpeg",
     title: "Celebration Mode",
     tag: "Birthday"
   },
   {
+    id: 11,
+    src: "/images/Moments/moment-traveler.jpeg",
+    title: "Traveler Vibes",
+    tag: "Adventure"
+  },
+  {
     id: 12,
-    src: "/images/Moments/moment-11.jpeg",
-    title: "Celebration Mode",
-    tag: "Birthday"
+    src: "/images/Moments/moment-fun.jpeg",
+    title: "Fun Vibes",
+    tag: "Enjoyment"
   },
   {
     id: 13,
-    src: "/images/CTA/cta.jpeg",
-    title: "Workspace",
-    tag: "Chasing Deadlines"
+    src: "/images/Moments/moment-techfest.jpeg",
+    title: "Techfest Vibes",
+    tag: "Innovation"
   },
   {
     id: 14,
+    src: "/images/Moments/moment-party.jpg",
+    title: "Party Mode",
+    tag: "Celebration"
+  },
+
+  {
+    id: 15,
     src: "/images/Expertise/expertise-img.jpeg",
     title: "Motivation Mode",
     tag: "Learning"
   },
   {
-    id: 15,
-    src: "/images/About/about-1.jpg",
+    id: 16,
+    src: "/images/Moments/about-1.jpg",
     title: "Hackathon Mode",
     tag: "Winner"
   },
   {
-    id: 16,
+    id: 17,
     src: "/images/Moments/moment-12.jpeg",
     title: "Techfest Mode",
     tag: "Festival"
   },
   {
-    id: 17,
+    id: 18,
     src: "/images/Moments/moment-13.jpeg",
     title: "Chasing Nature",
     tag: "Capture Mode"
   },
   {
-    id: 18,
+    id: 19,
     src: "/images/Moments/moment-14.jpeg",
     title: "AI Mode",
     tag: "Carnival"
   },
   {
-    id: 19,
+    id: 20,
     src: "/images/Moments/moment-15.jpeg",
     title: "Sports Mode",
     tag: "Beach"
   },
   {
-    id: 20,
+    id: 21,
     src: "/images/Moments/moment-16.jpeg",
     title: "AI Summit",
     tag: "Carnival Vibes"
   },
   {
-    id: 21,
+    id: 22,
     src: "/images/Moments/moment-17.jpeg",
     title: "Chasing Desert",
     tag: "Nature"
   },
   {
-    id: 22,
+    id: 23,
     src: "/images/Moments/moment-18.jpeg",
     title: "Celebration Mode",
     tag: "Performance"
   },
   {
-    id: 23,
+    id: 24,
     src: "/images/Moments/moment-19.jpeg",
     title: "Corporate Vibe",
     tag: "Office"
-  },  
+  }
 ];
 
 const MomentCard = ({ moment }) => {

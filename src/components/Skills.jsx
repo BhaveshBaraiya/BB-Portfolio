@@ -23,7 +23,7 @@ const skillCategories = [
       { name: "Node.js & Express", level: 90 },
       { name: "MongoDB", level: 88 },
       { name: "Python (AI/ML Integration)", level: 75 },
-      { name: "PHP & TYPO3 Enterprise", level: 85 },
+      { name: "CMS Enterprise", level: 85 },
       { name: "CRM Integrations", level: 80 },
     ]
   }

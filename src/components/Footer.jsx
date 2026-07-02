@@ -116,7 +116,7 @@ const Footer = () => {
               Follow Me On
             </p>
            <div className="flex items-center gap-6">
-            <a href="https://github.com/itsbaraiya" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-white transition-all duration-300 hover:scale-110">
+            <a href="http://github.com/BhaveshBaraiya/" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-white transition-all duration-300 hover:scale-110">
               <GithubIcon />
             </a>
             <a href="https://www.linkedin.com/in/bhavesh-baraiya/" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-[#0A66C2] transition-all duration-300 hover:scale-110">

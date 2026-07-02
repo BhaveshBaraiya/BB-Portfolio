@@ -7,17 +7,16 @@ import SectionTitle from './SectionTitle';
 gsap.registerPlugin(ScrollTrigger);
 
 const aboutSliderImages = [
-  "/images/About/about-1.jpg", 
+  "/images/About/about-1.png", 
   "/images/About/about-2.jpeg",
-  "/images/About/about-3.jpeg"
+  "/images/About/about-3.jpg"
 ];
 
 const headlineTech = [
-  "MERN", "PYTHON", "TYPO3", "PHP", "TypeScript", 
-  "JavaScript", "React Native", "Angular", 
+  "MERN", "PYTHON", "CMS", "PHP", "TypeScript", 
+  "JavaScript", "React.js","Next.js", "Angular", 
   "Vue", "Shopify"
 ];
-
 
 const AboutSliderImage = ({ src, index, currentImageIndex }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -164,7 +163,7 @@ const About = () => {
               <div className="about-text-anim flex items-center gap-3">
                 <div className="h-[1px] w-12 bg-cyan-600 dark:bg-cyan-400"></div>
                 <h2 className="text-cyan-600 dark:text-cyan-400 font-mono text-sm tracking-[0.2em] uppercase font-semibold">
-                  Full Stack Engineer
+                  Software Engineer
                 </h2>
               </div>
               
@@ -189,7 +188,7 @@ const About = () => {
 
             <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
               <p className="about-text-anim will-change-transform border-l-2 border-zinc-300 dark:border-zinc-700 pl-6">
-                With over 3+ years of professional experience, I specialize in engineering high-performance digital architectures. While my foundation is deeply rooted in the MERN stack, my expertise spans across a vast ecosystem—from crafting enterprise CMS solutions in PHP and TYPO3, to building dynamic interfaces with modern frontend frameworks.
+                With over 3+ years of professional experience, I specialize in engineering high-performance digital architectures. While my foundation is deeply rooted in the MERN stack, my expertise spans across a vast ecosystem—from crafting enterprise CMS solutions to building dynamic interfaces with modern frontend frameworks.
               </p>
               <p className="about-text-anim will-change-transform border-l-2 border-zinc-300 dark:border-zinc-700 pl-6">
                 I don't just write code; I architect solutions that drive real business value. Recently, I have been expanding my technical trajectory into the realm of AI and Machine Learning. By utilizing Python, I integrate intelligent, data-driven features into modern web platforms, bridging the gap between traditional software development and the future of tech.
