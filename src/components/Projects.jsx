@@ -10,6 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 const projectsData = [
   {
     id: "01",
+    title: "Make My Invoice Pro",
+    category: "Commercial B2B SaaS Platform",
+    description: "A commercial B2B SaaS platform for invoice generation, client management, PDF rendering, Razorpay subscription billing, and Progressive Web App (PWA) installation.",
+    tech: ["Vue 3", "TypeScript", "Tailwind CSS", "Vite", "Laravel 12", "MySQL", "Sanctum", "Razorpay SDK", "VitePWA", "Resend SMTP"],
+    image: "/images/Projects/MakeMyInvoice.png", 
+    liveLink: "https://makemyinvoice.vercel.app/",
+    githubLink: "https://github.com/BhaveshBaraiya/MakeMyInvoicePro"
+  },
+  {
+    id: "02",
     title: "TaskFlow Pro",
     category: "Enterprise Project Management",
     description: "A full-stack project management platform featuring real-time Kanban boards, task automation, and team collaboration. Integrated with Pusher for live notifications and NextAuth for secure, role-based access.",
@@ -19,7 +29,7 @@ const projectsData = [
     githubLink: "https://github.com/BhaveshBaraiya/Taskflow-Pro"
   },
   {
-    id: "02",
+    id: "03",
     title: "BB Shop",
     category: "E-commerce Website",
     description: "A modern e-commerce platform built using the MERN stack. Offers seamless shopping with cart, orders, and secure online payments.",
@@ -29,7 +39,7 @@ const projectsData = [
     githubLink: "https://github.com/BhaveshBaraiya/BB-Shop"
   },
   {
-    id: "03",
+    id: "04",
     title: "Food Delivery",
     category: "Food Delivery Website",
     description: "A modern food delivery web application with a smooth and intuitive user experience. Features menu browsing, cart management, and responsive design for seamless ordering.",
@@ -39,7 +49,7 @@ const projectsData = [
     githubLink: "https://github.com/itsbaraiya/food-delivery"
   },
   {
-    id: "04",
+    id: "05",
     title: "RFP AI Platform",
     category: "AI SaaS Dashboard",
     description: "A next-generation proposal management engine. Features a complex user dashboard with role-based access, credit systems, and an integrated AI engine to auto-generate enterprise proposals.",
@@ -49,7 +59,7 @@ const projectsData = [
     githubLink: "https://github.com/itsbaraiya/RFP"
   },
   {
-    id: "05",
+    id: "06",
     title: "BBChat Real-Time Messenger",
     category: "Full-Stack Real-Time Communication",
     description: "A professional-grade, real-time messaging platform inspired by classic desktop chat interfaces. Engineered for speed and reliability, featuring instant socket-based communication, custom notification management, and media sharing capabilities.",
@@ -64,7 +74,7 @@ const projectsData = [
     githubLink: "https://github.com/BhaveshBaraiya/BB-Chat"
   },
   {
-    id: "06",
+    id: "07",
     title: "BB Travels & Destinations",
     category: "Tours & Travels Website",
     description: "A tours and travels website that provides so many features to its users like it provides about the tour packages,price,inclusions and so many other features.You can discover so many tour packages.",
@@ -73,7 +83,7 @@ const projectsData = [
     liveLink: "https://itsbaraiya.github.io/BB.github.io/tours.html",
   },
   {
-    id: "07",
+    id: "08",
     title: "MERN Portfolio Template",
     category: "Full Stack Portfolio",
     description: "A full-stack MERN portfolio with a powerful backend and admin panel.Features secure authentication, real-time interactions, and dynamic content management.",
