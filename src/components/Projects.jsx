@@ -15,7 +15,7 @@ const projectsData = [
     description: "A commercial B2B SaaS platform for invoice generation, client management, PDF rendering, Razorpay subscription billing, and Progressive Web App (PWA) installation.",
     tech: ["Vue 3", "TypeScript", "Tailwind CSS", "Vite", "Laravel 12", "MySQL", "Sanctum", "Razorpay SDK", "VitePWA", "Resend SMTP"],
     image: "/images/Projects/MakeMyInvoice.png", 
-    liveLink: "https://makemyinvoice.vercel.app/",
+    liveLink: "https://www.makemyinvoice.online/",
     githubLink: "https://github.com/BhaveshBaraiya/MakeMyInvoicePro"
   },
   {
